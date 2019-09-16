@@ -23,7 +23,6 @@
     my_each { |element| result << element if yield(element) }
     result
 
-    end
   end
 
   def my_all? 
