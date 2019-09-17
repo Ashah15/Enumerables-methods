@@ -15,12 +15,12 @@ RSpec.describe Enumerable do
   end
 
   describe "#my_each_with_index" do
-            it "tests my_each_with_index method with a hash" do
-                test = Hash.new
-                test_array.my_each_with_index do |value, index|test[index] = value if value > 5 end
-                expect(test).to eq({ 4 => 8})
-            end
-        end
+    it "tests my_each_with_index method with a hash" do
+      test = Hash.new
+      test_array.my_each_with_index do |value, index|test[index] = value if value > 5 end
+      expect(test).to eq({ 4 => 8})
+    end
+  end
 
   describe '#my_select' do
     it 'returns a new array where element satisfies condition given in the block.' do
