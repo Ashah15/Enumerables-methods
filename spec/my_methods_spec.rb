@@ -35,9 +35,12 @@ RSpec.describe Enumerable do
     end
   end
         
-  describe "#my_any?" do
-    it "tests my_any? method" do
-      expect(test_array.my_any? do |x| x % 2 != 0 end).to eq(false)
+  describe '#my_any?' do
+    it 'returns true if condition hold for any elements' do
+      expect(test_array.my_any?(&:even?)).to eql(true)
+    end
+    it "returns false if condition doesn't hold for all elements" do
+      expect(test_array.my_any? do |x| x % 2 == 0 end).to eql(true)
     end
   end
         
