@@ -53,6 +53,12 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe "#my_map" do
+    it "tests my_map method" do
+      expect(array.my_map do |x| x * 2 end).to eq([4, 4, 4, 8, 16])
+    end
+  end
+
   describe '#my_inject' do
     it 'returns the accumulated result of operation performed on each element in
     the array with initial value given as parameter.' do
