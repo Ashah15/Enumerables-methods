@@ -14,11 +14,13 @@ RSpec.describe Enumerable do
     end
   end
 
-  describe '#my_each_with_index' do
-    it 'loop through each of the elements in the array and giving it access to it index' do
-      expect(test_array_1.my_each { |element| element }).to eql(test_array_1)
-    end
-  end
+  describe "#my_each_with_index" do
+            it "tests my_each_with_index method with a hash" do
+                test = Hash.new
+                test_array.my_each_with_index do |value, index|test[index] = value if value > 5 end
+                expect(test).to eq({ 4 => 8})
+            end
+        end
 
   describe '#my_select' do
     it 'returns a new array where element satisfies condition given in the block.' do
