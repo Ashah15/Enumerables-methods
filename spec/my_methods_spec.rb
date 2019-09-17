@@ -31,19 +31,19 @@ RSpec.describe Enumerable do
   
   describe "#my_all?" do
     it "tests my_all? method" do
-      expect(array.my_all? do |x| x % 2 == 0 end).to eq(false)
+      expect(test_array.my_all? do |x| x % 2 == 0 end).to eq(true)
     end
   end
         
   describe "#my_any?" do
     it "tests my_any? method" do
-      expect(array.my_any? do |x| x % 2 != 0 end).to eq(true)
+      expect(test_array.my_any? do |x| x % 2 != 0 end).to eq(false)
     end
   end
         
   describe "#my_none?" do
     it "tests my_none? method" do
-      expect(array.my_none? do |x| x > 20 end).to eq(true)
+      expect(test_array.my_none? do |x| x > 20 end).to eq(true)
     end
   end
 
@@ -55,7 +55,7 @@ RSpec.describe Enumerable do
 
   describe "#my_map" do
     it "tests my_map method" do
-      expect(array.my_map do |x| x * 2 end).to eq([4, 4, 4, 8, 16])
+      expect(test_array.my_map do |x| x * 2 end).to eq([4, 4, 4, 8, 16])
     end
   end
 
