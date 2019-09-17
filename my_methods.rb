@@ -22,7 +22,6 @@
     result = []
     my_each { |element| result << element if yield(element) }
     result
-
   end
 
   def my_all? 
