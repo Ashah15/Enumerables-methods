@@ -25,34 +25,50 @@
 
   end
 
-  def my_all? 
+  def my_all?(value = nil)
     flag = true
-    my_each { |element| flag &&= yield(element) }
+    if value
+      my_each { |element| flag &&= element == value }
+    else
+      my_each { |element| flag &&= yield(element) }
+    end
     flag
   end
 
-  def my_any? 
-    false
-    my_each {  |item| return true if yield(item) }
-    
-  end
-
-
-  def my_none?
-   result = true
-    my_each { |item| result = false if yield(item) }
+  def my_any?(value = nil)
+    result = false
+    if value
+      my_each { |item| result = true if item == value }
+    else
+      my_each { |item| result = true if yield(item) }
+    end
     result
   end
 
-  def my_count(args = nil)
-    array = self
-    counter = 0
-    if args.nil?
-      array.my_each { counter += 1 }
+  def my_none?(value = nil)
+    result = true
+    if value
+      my_each { |item| result = false if item == value}
     else
-      array.my_each { |x| counter += 1 if x == args }
+      my_each { |item| result = false if yield(item) }
     end
-    counter
+    result
+  end
+   
+  def my_count value = nil
+    count = 0
+    self.my_each do|elem|
+      if value 
+        if elem == value 
+          count += 1
+        end
+      elsif block_given? 
+        count += 1 if yield elem
+      else
+        count = self.length
+      end 
+    end
+        count
   end
    
   def my_map(proc = nil)
@@ -67,12 +83,25 @@
     end
     result
   end
-
-  def my_inject(initial)
-    result = initial || 0
-    my_each do |element|
-      result = yield(result, element)
+      
+  def my_inject(arg = nil)
+    aux = self[0]
+    value = 0
+    self.my_each_with_index do |value, index|
+      if index > 0
+        aux = yield(aux,value)
+      end
     end
-    result
-  end
+    if arg
+      a = 3.0
+      b = 2.0
+      if yield(a, b) == 5
+        aux += arg
+      elsif yield(a, b) == 6
+        aux *= arg
+      end
+    else
+      aux
+    end
+  end 
 end
